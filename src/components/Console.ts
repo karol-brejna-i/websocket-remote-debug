@@ -41,14 +41,12 @@ export class Console {
    * Setup scroll listener for auto-scroll detection
    */
   private setupScrollListener(): void {
-    const scrollParent = this.container.parentElement;
-    if (!scrollParent) return;
-
-    scrollParent.addEventListener('scroll', () => {
+    // The container itself has overflow-y: auto
+    this.container.addEventListener('scroll', () => {
       if (!this.autoScroll) return;
       
-      const isAtBottom = scrollParent.scrollHeight - scrollParent.scrollTop 
-        <= scrollParent.clientHeight + 50;
+      const isAtBottom = this.container.scrollHeight - this.container.scrollTop 
+        <= this.container.clientHeight + 50;
       
       // Show "new messages" button when scrolled up
       const scrollBtn = document.getElementById('scrollToBottomBtn');
@@ -296,10 +294,8 @@ export class Console {
    * Scroll to bottom of console
    */
   scrollToBottom(): void {
-    const scrollParent = this.container.parentElement;
-    if (scrollParent) {
-      scrollParent.scrollTop = scrollParent.scrollHeight;
-    }
+    // The container itself has overflow-y: auto, so scroll it directly
+    this.container.scrollTop = this.container.scrollHeight;
   }
 
   /**

@@ -149,6 +149,14 @@
   background-color: var(--bg-hover);
 }
 
+.btn--icon.btn--active {
+  color: var(--accent-primary);
+}
+
+.btn--icon.btn--active:hover:not(:disabled) {
+  color: var(--accent-hover);
+}
+
 .btn__icon {
   width: 16px;
   height: 16px;
