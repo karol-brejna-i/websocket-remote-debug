@@ -51,4 +51,26 @@ describe('RemoteDebugCodec', () => {
     const levelChanged = controlEvents.find((e) => e.type === 'levelChanged');
     expect(levelChanged).toEqual({ type: 'levelChanged', level: DebugLevel.Debug });
   });
+
+  it('parses simple level prefix formats', () => {
+    // Test [L] format
+    const bracketsInput = '[V] Verbose message\n[D] Debug message\n[I] Info message\n[W] Warning message\n[E] Error message';
+    const { messages: bracketsMessages } = codec.decode(bracketsInput);
+    
+    expect(bracketsMessages[0].level).toBe(DebugLevel.Verbose);
+    expect(bracketsMessages[0].content).toContain('Verbose message');
+    expect(bracketsMessages[1].level).toBe(DebugLevel.Debug);
+    expect(bracketsMessages[2].level).toBe(DebugLevel.Info);
+    expect(bracketsMessages[3].level).toBe(DebugLevel.Warning);
+    expect(bracketsMessages[4].level).toBe(DebugLevel.Error);
+
+    // Test (L) format
+    const parensInput = '(V) Verbose with parens\n(E) Error with parens';
+    const { messages: parensMessages } = codec.decode(parensInput);
+    
+    expect(parensMessages[0].level).toBe(DebugLevel.Verbose);
+    expect(parensMessages[0].content).toContain('Verbose with parens');
+    expect(parensMessages[1].level).toBe(DebugLevel.Error);
+    expect(parensMessages[1].content).toContain('Error with parens');
+  });
 });

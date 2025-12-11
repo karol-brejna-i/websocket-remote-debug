@@ -171,7 +171,7 @@ export class MessageParser {
     }
 
     // Simpler format: (V) message or [V] message
-    const basicRegex = /^[\[(]([VDIWE])[\])]\s*(.+)$/;
+    const basicRegex = /^[[()]([VDIWE])[\])]\s*(.+)$/;
     match = line.match(basicRegex);
 
     if (match) {
@@ -216,7 +216,7 @@ export class MessageParser {
           raw,
         };
 
-      case 'L':
+      case 'L': {
         // Level change: $app:L:<1-5> or $app:L:1-5
         const levelPart = parts[1] || '';
         // Handle both "2" and "1-5" format
@@ -226,6 +226,7 @@ export class MessageParser {
           data: { level },
           raw,
         };
+      }
 
       case 'M':
         // Memory: $app:M:<bytes>u:

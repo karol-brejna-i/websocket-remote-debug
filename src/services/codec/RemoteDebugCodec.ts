@@ -119,10 +119,11 @@ export class RemoteDebugCodec implements IMessageCodec {
       case 'raw':
         return command.command;
       
-      default:
+      default: {
         // Exhaustive check
         const _exhaustive: never = command;
         return String(_exhaustive);
+      }
     }
   }
 
@@ -262,7 +263,7 @@ export class RemoteDebugCodec implements IMessageCodec {
     }
 
     // Format 5: [L] message or (L) message (simple level prefix)
-    const basicRegex = /^[\[(]([VDIWE])[\])]\s*(.+)$/;
+    const basicRegex = /^[[()]([VDIWE])[\])]\s*(.+)$/;
     match = stripped.match(basicRegex);
 
     if (match) {
@@ -312,7 +313,7 @@ export class RemoteDebugCodec implements IMessageCodec {
           info: this.buildDeviceInfo(parts),
         };
 
-      case 'L':
+      case 'L': {
         // Level change: $app:L:<1-5>
         const levelPart = parts[1] || '';
         const level = parseInt(levelPart.split('-')[0], 10) || 3;
@@ -320,6 +321,7 @@ export class RemoteDebugCodec implements IMessageCodec {
           type: 'levelChanged',
           level,
         };
+      }
 
       case 'M':
         // Memory: $app:M:<bytes>u:

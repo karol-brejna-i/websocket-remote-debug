@@ -21,7 +21,6 @@ import type {
   AppSettings, 
   ConnectionState, 
   DeviceInfo, 
-  ParsedMessage,
   DebugLevel,
   Filter,
 } from '../types';
