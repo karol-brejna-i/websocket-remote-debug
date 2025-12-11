@@ -21,7 +21,20 @@ export class Console {
 
   constructor(container: HTMLElement) {
     this.container = container;
+    this.showWelcome();
     this.setupScrollListener();
+  }
+
+  /**
+   * Show welcome message in empty console
+   */
+  private showWelcome(): void {
+    this.container.innerHTML = `
+      <div class="console__welcome">
+        <p>Welcome to WSTerm</p>
+        <p class="console__welcome-hint">Enter device IP address and click Connect</p>
+      </div>
+    `;
   }
 
   /**
