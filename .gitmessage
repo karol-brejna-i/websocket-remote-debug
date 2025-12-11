@@ -1,0 +1,13 @@
+<type>(<scope>): <short summary>
+
+One-line summary (50-72 chars)
+
+Why this change was made:
+- Short explanation of the motivation and context.
+
+What changed:
+- Brief notes about key implementation choices, migration steps, or noteworthy details.
+
+Footer:
+Closes #<issue-number>
+BREAKING CHANGE: <description>

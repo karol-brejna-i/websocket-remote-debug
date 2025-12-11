@@ -12,7 +12,7 @@
   <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-5.0-646CFF.svg" alt="Vite"/></a>
 </p>
 
-WSTerm is a modern, lightweight web-based terminal application for remotely debugging ESP32 and ESP8266 microcontrollers running the [RemoteDebug](https://github.com/JoaoLopesF/RemoteDebug) library.
+WSTerm is a modern, lightweight web-based terminal application for remotely debugging ESP32 and ESP8266 microcontrollers running the [RemoteDebug](https://github.com/karol-brejna-i/RemoteDebug) library.
 
 
 ## Features
@@ -41,7 +41,7 @@ WSTerm is a modern, lightweight web-based terminal application for remotely debu
 
 - Node.js 18+ 
 - npm or yarn
-- An ESP32/ESP8266 running [RemoteDebug](https://github.com/JoaoLopesF/RemoteDebug)
+- An ESP32/ESP8266 running [RemoteDebug](https://github.com/karol-brejna-i/RemoteDebug)
 
 ### Installation
 

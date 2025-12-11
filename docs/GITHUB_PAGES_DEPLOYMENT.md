@@ -94,7 +94,7 @@ on:
   push:
     branches:
       - main
-      - master
+      - develop
   workflow_dispatch:  # Allow manual trigger
 
 permissions:
