@@ -5,6 +5,7 @@
  */
 
 import type { ConnectionState } from '../types';
+import logoIcon from '../assets/WSTerm_icon.svg';
 
 export interface HeaderEvents {
   onConnect: (ip: string) => void;
@@ -36,7 +37,7 @@ export class Header {
     this.container.innerHTML = `
       <header class="header">
         <button class="header__logo" id="logo-btn" title="About WSTerm" aria-label="About WSTerm">
-          <img src="./assets/WSTerm_icon.svg" alt="WSTerm" class="header__logo-icon">
+          <img src="${logoIcon}" alt="WSTerm" class="header__logo-icon">
           <span class="header__title"><span class="header__title--accent">WS</span>Term</span>
         </button>
         

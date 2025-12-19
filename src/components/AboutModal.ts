@@ -5,6 +5,7 @@
  */
 
 import { VERSION_INFO } from '../version';
+import logoIcon from '../assets/WSTerm_icon.svg';
 
 export interface AboutInfo {
   version: string;
@@ -77,7 +78,7 @@ export class AboutModal {
         </button>
         
         <div class="about-modal__header">
-          <img src="./assets/WSTerm_icon.svg" alt="WSTerm" class="about-modal__logo">
+          <img src="${logoIcon}" alt="WSTerm" class="about-modal__logo">
           <h1 id="about-title" class="about-modal__title">
             <span class="about-modal__title--accent">WS</span>Term
           </h1>

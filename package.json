@@ -9,6 +9,7 @@
     "pretypecheck": "node scripts/generate-version.js",
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:inline": "npm run build && node scripts/inline-build.js",
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage",

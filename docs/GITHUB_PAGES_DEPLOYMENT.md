@@ -6,6 +6,50 @@ This guide explains how to deploy WSTerm to GitHub Pages, making it accessible v
 
 GitHub Pages is a free static hosting service that serves files directly from a GitHub repository. WSTerm's static build is fully compatible with GitHub Pages.
 
+> ⚠️ **Important Connectivity Limitation**
+> 
+> GitHub Pages serves content over **HTTPS only**. Due to browser security policies, HTTPS pages can only establish WebSocket connections using the secure `wss://` protocol — plain `ws://` connections are blocked.
+> 
+> **This means you cannot connect to typical ESP32/ESP8266 devices directly from GitHub Pages**, as these devices usually don't support SSL/TLS for WebSocket connections.
+> 
+> **Alternatives:**
+> - **Run WSTerm locally** (`npm run dev` or serve the built files) to connect to non-SSL devices on your local network
+> - **Use a reverse proxy** (e.g., nginx, Caddy) with SSL termination to bridge the connection
+> - **Deploy to HTTP** — self-host on a non-HTTPS server for local network use
+>
+> The GitHub Pages deployment is ideal for demonstration purposes, testing the UI, or connecting to devices that support secure WebSockets.
+
+## Prerequisites
+
+Before deploying, ensure you have:
+
+- Git installed locally
+- Repository cloned and dependencies installed
+- Write access to the GitHub repository
+
+### Enable GitHub Pages in Repository Settings
+
+GitHub Pages must be enabled in your repository settings before deployment:
+
+1. Go to your repository on GitHub
+2. Navigate to **Settings** → **Pages**
+3. Under "Build and deployment" → "Source":
+   - For **manual deployment**: select `gh-pages` branch (after first push)
+   - For **GitHub Actions**: select **GitHub Actions**
+4. Click **Save**
+
+Your app will be available at:
+```
+https://<username>.github.io/<repository-name>/
+```
+
+For this project:
+```
+https://karol-brejna-i.github.io/websocket-remote-debug/
+```
+
+---
+
 ## Deployment Methods
 
 There are two main approaches:
@@ -15,12 +59,6 @@ There are two main approaches:
 ---
 
 ## Method 1: Manual Deployment
-
-### Prerequisites
-
-- Git installed locally
-- Repository cloned and dependencies installed
-- Write access to the GitHub repository
 
 ### Steps
 
@@ -63,18 +101,6 @@ git push origin gh-pages --force
 
 # Switch back to main branch
 git checkout main
-```
-
-#### 3. Enable GitHub Pages
-
-1. Go to your repository on GitHub
-2. Navigate to **Settings** → **Pages**
-3. Under "Source", select `gh-pages` branch
-4. Click **Save**
-
-Your app will be available at:
-```
-https://karol-brejna-i.github.io/websocket-remote-debug/
 ```
 
 ---
@@ -145,13 +171,7 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-### Step 2: Enable GitHub Pages with Actions
-
-1. Go to your repository on GitHub
-2. Navigate to **Settings** → **Pages**
-3. Under "Build and deployment" → "Source", select **GitHub Actions**
-
-### Step 3: Trigger Deployment
+### Step 2: Trigger Deployment
 
 Push any changes to the `main` branch, or manually trigger the workflow:
 
@@ -178,22 +198,6 @@ export default defineConfig({
 ```
 
 > **Note:** The current configuration uses `'./'` (relative paths), which works for both root and subdirectory deployments.
-
----
-
-## Verifying Deployment
-
-After deployment, your app will be accessible at:
-
-| Repository Type | URL Pattern |
-|-----------------|-------------|
-| User/Org site (`username.github.io`) | `https://username.github.io/` |
-| Project site | `https://username.github.io/repository-name/` |
-
-For this project:
-```
-https://karol-brejna-i.github.io/websocket-remote-debug/
-```
 
 ---
 

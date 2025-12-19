@@ -27,11 +27,16 @@ export default defineConfig({
         assetFileNames: 'assets/[name].[hash][extname]',
         chunkFileNames: 'assets/[name].[hash].js',
         entryFileNames: 'assets/[name].[hash].js',
+        
+        // Try to inline as much as possible
+        manualChunks: undefined,
       },
     },
     
-    // Inline small assets
-    assetsInlineLimit: 4096,
+    // Inline ALL assets to create a single HTML file
+    // This makes it work with file:// protocol
+    assetsInlineLimit: 100000000, // 100MB - inline everything
+    cssCodeSplit: false, // Single CSS file
   },
 
   server: {
